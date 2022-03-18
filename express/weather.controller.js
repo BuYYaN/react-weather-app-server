@@ -4,6 +4,7 @@ const db = require("../firebase");
 
 const getWeatherHistory = async (req, res) => {
   const limit = req.body.limit ?? Infinity;
+  res.json(limit);
 
   const weatherRef = db.collection("weather-history");
   const snapshot = await weatherRef.get();
