@@ -21,7 +21,8 @@ const getWeatherHistory = async (req, res) => {
 
 const getWeatherInfo = async (req, res) => {
   const apiKey = req.body.apiKey;
-  const { lon, lat } = req.body.coords;
+  const lat = req.body.lat;
+  const lon = req.body.lon;
 
   const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
