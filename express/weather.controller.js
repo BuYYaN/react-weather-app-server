@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require("uuid");
 const db = require("../firebase");
 
 const getWeatherHistory = async (req, res) => {
-  const limit = req.query.limit ?? Infinity;
+  const limit = req.body.limit ?? Infinity;
 
   const weatherRef = db.collection("weather-history");
   const snapshot = await weatherRef.get();
@@ -20,9 +20,8 @@ const getWeatherHistory = async (req, res) => {
 };
 
 const getWeatherInfo = async (req, res) => {
-  const apiKey = req.query.apiKey;
-  const lon = req.query.lon;
-  const lat = req.query.lat;
+  const apiKey = req.body.apiKey;
+  const { lon, lat } = req.body.coords;
 
   const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
