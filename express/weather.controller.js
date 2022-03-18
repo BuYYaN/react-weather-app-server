@@ -4,7 +4,6 @@ const db = require("../firebase");
 
 const getWeatherHistory = async (req, res) => {
   const limit = req.body.limit ?? Infinity;
-  res.json(limit);
 
   const weatherRef = db.collection("weather-history");
   const snapshot = await weatherRef.get();
@@ -17,7 +16,7 @@ const getWeatherHistory = async (req, res) => {
 
   historyArr.sort((data1, data2) => data2.time - data1.time);
 
-  res.json(historyArr.slice(0, limit));
+  res.status(200).json(historyArr.slice(0, limit));
 };
 
 const getWeatherInfo = async (req, res) => {
@@ -61,7 +60,7 @@ const getWeatherInfo = async (req, res) => {
       formattedData.totalQueries = 1;
     }
 
-    res.json({ data: formattedData });
+    res.status(200).json({ data: formattedData });
   } catch (error) {
     res.status(401).json({ error });
   }
